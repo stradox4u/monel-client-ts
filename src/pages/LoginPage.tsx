@@ -3,7 +3,7 @@ import googleLogo from "../assets/images/google-logo.png";
 
 const LoginPage: React.FC = () => {
   const googleLogin = () => {
-    window.open(`${process.env.REACT_APP_BACKEND_URL}/auth/google`, "_self");
+    window.open(`${import.meta.env.VITE_APP_BACKEND_URL}/auth/google`, "_self");
   }
 
   return (
