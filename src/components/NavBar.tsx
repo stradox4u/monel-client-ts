@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useFetchUserQuery, useLogoutUserMutation } from "../../store";
+import { getCurrentUser, store, useLogoutUserMutation } from "../../store";
 
 const NavBar: React.FC = () => {
-  const { data: userObject, error, isLoading } = useFetchUserQuery();
+  
+  const userObject = getCurrentUser(store.getState());
   
   const [showLogout, setShowLogout] = useState(false);
   const toggleLogout = () => {

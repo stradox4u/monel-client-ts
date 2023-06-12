@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import AuthLayout from "./layouts/AuthLayout";
@@ -6,26 +7,22 @@ import "./App.css"
 import LoginPage from "./pages/LoginPage";
 import LandingPage from "./pages/LandingPage";
 import SalePage from "./pages/SalePage";
-import { useFetchUserQuery } from "../store";
+import { getCurrentUser, store, useFetchUserQuery } from "../store";
 
 const App: React.FC = () => {
-  // eslint-disable-next-line prefer-const
-  let { data: user, error, isLoading } = useFetchUserQuery();
-
-  if (error) {
-    user = undefined;
-  }
+  const { isLoading } = useFetchUserQuery();
+  const user = getCurrentUser(store.getState());
 
   const isAdmin = user?.role === "admin" || user?.role === "super user";
 
-  const relevantLanding = isAdmin ? (<LandingPage />) : (<Navigate replace to={`/user/${user?._id}/sales`} />);
+  const relevantLanding = user && isAdmin ? (<LandingPage />) : (<Navigate replace to={`/user/${user?._id}/sales`} />);
 
   if (!isLoading) {
     return (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AppLayout />}>
-            <Route index element={!user ? (
+            <Route index element={Object.keys(user).length === 0  ? (
               <Navigate replace to='/auth' />
             ) : (
                 relevantLanding
@@ -33,7 +30,7 @@ const App: React.FC = () => {
             <Route path='/user/:userId/sales' element={<SalePage />} />
           </Route>
           <Route path='/auth' element={<AuthLayout />}>
-            <Route index element={user ? (
+            <Route index element={Object.keys(user).length > 0 ? (
               <Navigate replace to='/' />
             ) : (
               <LoginPage />
@@ -48,4 +45,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default App;

@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import { CurrentUser } from "../../src/types";
 
+
+
 const userApi = createApi({
   reducerPath: "user",
   baseQuery: fetchBaseQuery({
@@ -10,7 +12,7 @@ const userApi = createApi({
   endpoints: (builder) => {
     return {
       fetchUser: builder.query<CurrentUser, void>({
-        providesTags: [{ type: "User" }],
+        providesTags: ["AuthUser"],
         query: () => {
           return {
             url: "/auth/user",
@@ -19,7 +21,7 @@ const userApi = createApi({
         }
       }),
       logoutUser: builder.mutation({
-        invalidatesTags: [{ type: "User" }],
+        invalidatesTags: ["AuthUser"],
         query: () => {
           return {
             url: "/auth/logout",
