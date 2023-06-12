@@ -1,35 +1,19 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchUser } from "../util/queries";
-import axios from "../util/axios";
-import { AxiosError } from "axios";
+import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { useFetchUserQuery, useLogoutUserMutation } from "../../store";
 
 const NavBar: React.FC = () => {
-  const { data: userObject } = useQuery({
-    queryKey: ["user"],
-    queryFn: fetchUser,
-  });
-
+  const { data: userObject, error, isLoading } = useFetchUserQuery();
+  
   const [showLogout, setShowLogout] = useState(false);
   const toggleLogout = () => {
     setShowLogout(!showLogout);
   }
 
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
-  const runLogout = async () => {
-    try {
-      const response = await axios.post("/auth/logout");
-      if (response.status === 200) {
-        queryClient.invalidateQueries({ queryKey: ["user"] });
-        navigate("/");
-      }
-    } catch (err: AxiosError | unknown) {
-      if (axios.isAxiosError(err)) {
-        throw new Error(err.response?.data.message);
-      }
-    }
+  const [logoutUser, response] = useLogoutUserMutation();
+ 
+  const runLogout = () => {
+    logoutUser({});
   }
 
 

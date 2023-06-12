@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import AuthLayout from "./layouts/AuthLayout";
@@ -7,18 +6,17 @@ import "./App.css"
 import LoginPage from "./pages/LoginPage";
 import LandingPage from "./pages/LandingPage";
 import SalePage from "./pages/SalePage";
-import { fetchUser } from "./util/queries";
-
+import { useFetchUserQuery } from "../store";
 
 const App: React.FC = () => {
+  // eslint-disable-next-line prefer-const
+  let { data: user, error, isLoading } = useFetchUserQuery();
 
-  const { isLoading, isError, data: user, error } = useQuery({
-    queryKey: ["user"],
-    queryFn: fetchUser,
-  });
+  if (error) {
+    user = undefined;
+  }
 
   const isAdmin = user?.role === "admin" || user?.role === "super user";
-  console.log(isAdmin)
 
   const relevantLanding = isAdmin ? (<LandingPage />) : (<Navigate replace to={`/user/${user?._id}/sales`} />);
 
