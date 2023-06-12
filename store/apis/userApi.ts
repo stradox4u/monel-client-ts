@@ -9,6 +9,7 @@ const userApi = createApi({
     baseUrl: import.meta.env.VITE_APP_BACKEND_URL,
     credentials: "include",
   }),
+  tagTypes: ["AuthUser"],
   endpoints: (builder) => {
     return {
       fetchUser: builder.query<CurrentUser, void>({
