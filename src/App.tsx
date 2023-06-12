@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import LandingPage from "./pages/LandingPage";
 import SalePage from "./pages/SalePage";
 import { getCurrentUser, store, useFetchUserQuery } from "../store";
+import StockPage from "./pages/StockPage";
 
 const App: React.FC = () => {
   const { isLoading } = useFetchUserQuery();
@@ -27,6 +28,7 @@ const App: React.FC = () => {
             ) : (
                 relevantLanding
             )} />
+            <Route path='/stock' element={<StockPage />} />
             <Route path='/user/:userId/sales' element={<SalePage />} />
           </Route>
           <Route path='/auth' element={<AuthLayout />}>

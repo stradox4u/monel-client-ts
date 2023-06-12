@@ -31,22 +31,29 @@ export interface StatData {
   salesData: StatSkeleton<SaleData>;
 }
 
-export interface PurchaseStats  {
+export interface PurchaseStats {
   purchasesData: StatSkeleton<Statify<StatsPieces, "purchases">>;
   purchasesChange: {
-      weekCountChange: number;
-      weekVolumeChange: number;
-      monthCountChange: number;
-      monthVolumeChange: number;
+    weekCountChange: number;
+    weekVolumeChange: number;
+    monthCountChange: number;
+    monthVolumeChange: number;
   };
 }
 
 export interface SaleStats {
   salesData: StatSkeleton<Statify<StatsPieces, "sales">>;
   salesChange: {
-      weekCountChange: number;
-      weekVolumeChange: number;
-      monthCountChange: number;
-      monthVolumeChange: number;
+    weekCountChange: number;
+    weekVolumeChange: number;
+    monthCountChange: number;
+    monthVolumeChange: number;
   };
+}
+
+export interface Product {
+  _id: string;
+  name: string;
+  price: string;
+  picture: string;
 }
