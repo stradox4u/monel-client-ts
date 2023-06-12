@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
 import { getCurrentUser, store, useLogoutUserMutation } from "../../store";
+import SearchBar from "./SearchBar";
 
 const NavBar: React.FC = () => {
   
@@ -23,7 +25,7 @@ const NavBar: React.FC = () => {
     <nav className="flex flex-row gap-8 justify-between align-baseline">
       <Link to="/" className="grow-0"><p className="text-3xl font-texturina text-monel-blue">MONEL Ventures</p></Link>
       <div className="grow">
-        {/* <SearchBar /> */}
+        <SearchBar />
       </div>
       <div onClick={toggleLogout} className="flex flex-row justify-end align-middle grow-0 cursor-pointer relative">
         <img src={userObject?.avatar} alt="user profile" className="rounded-full w-12 h-12 object-cover" />

@@ -6,6 +6,7 @@ import { CurrentUser } from "../src/types";
 import { statsApi } from "./apis/statsApi";
 import { productsApi } from "./apis/productsApi";
 import { inventoryApi } from "./apis/inventoryApi";
+import { searchReducer, setSearchTerm } from "./slices/searchSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     [productsApi.reducerPath]: productsApi.reducer,
     [inventoryApi.reducerPath]: inventoryApi.reducer,
     auth: authReducer,
+    search: searchReducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
@@ -31,11 +33,11 @@ export const clearUser = () => {
   store.dispatch(userApi.util.resetApiState());
 }
 
-export { store };
+export { store, setSearchTerm };
 export { useFetchUserQuery, useLogoutUserMutation } from "./apis/userApi";
 export { useFetchStatsQuery } from "./apis/statsApi";
-type RootState = ReturnType<typeof store.getState>;
-export const getCurrentUser = (state: RootState) => state.auth.user as CurrentUser;
+export type StoreRootState = ReturnType<typeof store.getState>;
+export const getCurrentUser = (state: StoreRootState) => state.auth.user as CurrentUser;
 export {
   useFetchProductsQuery,
   useCreateProductMutation,
