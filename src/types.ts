@@ -57,3 +57,9 @@ export interface Product {
   price: string;
   picture: string;
 }
+
+export interface CartItem {
+  product: Product;
+  price: number;
+  quantity: number;
+}

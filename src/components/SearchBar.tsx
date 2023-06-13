@@ -15,7 +15,7 @@ const SearchBar: React.FC = () => {
       <input
         className="shadow-md px-3 rounded-l-md border-none grow focus:outline-none focus:ring-1 focus:ring-monel-blue"
         type="text"
-        placeholder="Search by product name, date..."
+        placeholder="Search by product name"
         value={value}
         onChange={onChange}
       />

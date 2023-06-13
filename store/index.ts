@@ -7,6 +7,8 @@ import { statsApi } from "./apis/statsApi";
 import { productsApi } from "./apis/productsApi";
 import { inventoryApi } from "./apis/inventoryApi";
 import { searchReducer, setSearchTerm } from "./slices/searchSlice";
+import { cartReducer } from "./slices/cartSlice";
+import { saleApi } from "./apis/saleApi";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +18,8 @@ const store = configureStore({
     [inventoryApi.reducerPath]: inventoryApi.reducer,
     auth: authReducer,
     search: searchReducer,
+    cart: cartReducer,
+    [saleApi.reducerPath]: saleApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
@@ -23,6 +27,7 @@ const store = configureStore({
       statsApi.middleware,
       productsApi.middleware,
       inventoryApi.middleware,
+      saleApi.middleware,
     );
   }
 });
@@ -45,3 +50,5 @@ export {
   useDeleteProductMutation
 } from "./apis/productsApi";
 export { useFetchInventoryQuery } from "./apis/inventoryApi";
+export { addToCart, removeFromCart, updateCart, emptyCart } from "./slices/cartSlice";
+export { useMakeSaleMutation, useMakePurchaseMutation } from "./apis/saleApi";
