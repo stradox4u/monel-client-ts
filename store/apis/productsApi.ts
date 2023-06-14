@@ -12,20 +12,17 @@ type ProductPostResponse = {
 }
 
 type UpdateProductBody = {
-  name: string;
-  price: number;
-  picture: string;
+  form: FormData;
   productId: string;
 }
 
-type CreateProductBody = Omit<UpdateProductBody, "productId">;
 
 const productsApi = createApi({
   reducerPath: "products",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_APP_BACKEND_URL,
     headers: {
-      "Content-Type": "application/json",
+      "Accept": "application/json",
     },
     credentials: "include",
   }),
@@ -41,31 +38,25 @@ const productsApi = createApi({
           }
         }
       }),
-      createProduct: builder.mutation<ProductPostResponse, CreateProductBody>({
+      createProduct: builder.mutation<ProductPostResponse, FormData>({
         invalidatesTags: ["Products"],
-        query: ({ name, price, picture }) => {
+        query: (body) => {
           return {
             url: "/product",
             method: "POST",
-            body: { name, price, picture },
+            body,
             params: {},
-            headers: {
-              "Content-Type": "multipart/form-data",
-            }
           }
         }
       }),
       updateProduct: builder.mutation<ProductPostResponse, UpdateProductBody>({
         invalidatesTags: ["Products"],
-        query: ({ name, price, picture, productId }) => {
+        query: ({ form, productId }) => {
           return {
             url: `/product/${productId}`,
             method: "PATCH",
-            body: { name, price, picture },
+            body: form,
             params: {},
-            headers: {
-              "Content-Type": "multipart/form-data",
-            }
           }
         }
       }),

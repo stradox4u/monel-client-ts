@@ -89,6 +89,12 @@ export interface Transaction {
   products: TransactionProduct[];
 }
 
-export type Transactions<Key extends string> = {
+export type Transactions<Key extends ("purchases" | "sales")> = {
   [U in Key]: Transaction[];
 } & { message: string; }
+
+export type ValidationErrors = {
+  name: string;
+  price: string;
+  picture: string;
+}
