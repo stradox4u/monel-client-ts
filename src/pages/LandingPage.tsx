@@ -7,10 +7,17 @@ import StatCard from "../components/StatCard";
 import spinner from "../assets/images/spinner.svg"
 
 const LandingPage: React.FC = () => {
-  const { data, isLoading } = useFetchStatsQuery(null);
+  const { data, isLoading, error } = useFetchStatsQuery();
 
   if (!isLoading) {
-    const { purchasesData, salesData }: StatData = data;
+    if (error && !data) {
+      return (
+        <div>
+          Error Occurred!
+        </div>
+      )
+    }
+    const { purchasesData, salesData } = data as StatData;
   
     const purchasesChange = {
       weekCountChange: purchasesData?.thisWeekData.purchasesCount > 0 ? ((purchasesData?.thisWeekData.purchasesCount - purchasesData?.lastWeekData.purchasesCount) / purchasesData?.thisWeekData.purchasesCount) * 100 : 0,

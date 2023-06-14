@@ -63,3 +63,32 @@ export interface CartItem {
   price: number;
   quantity: number;
 }
+
+export interface Inventory {
+  [key: string]: {
+    productId: string;
+    stockQuantity: number;
+  }
+}
+
+export interface TransactionProduct {
+  _id: string;
+  price: number;
+  quantity: number;
+  productId: {
+    _id: string;
+    name: string;
+  }
+}
+export interface Transaction {
+  createdAt: Date;
+  updatedAt: Date;
+  total: number;
+  userId: string;
+  _id: string;
+  products: TransactionProduct[];
+}
+
+export type Transactions<Key extends string> = {
+  [U in Key]: Transaction[];
+} & { message: string; }

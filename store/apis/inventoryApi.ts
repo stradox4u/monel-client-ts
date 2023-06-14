@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Inventory } from "../../src/types";
 
 const inventoryApi = createApi({
   reducerPath: "inventory",
@@ -9,7 +10,7 @@ const inventoryApi = createApi({
   tagTypes: ["Inventory"],
   endpoints: (builder) => {
     return {
-      fetchInventory: builder.query({
+      fetchInventory: builder.query<Inventory, void>({
         providesTags: ["Inventory"],
         query: () => {
           return {

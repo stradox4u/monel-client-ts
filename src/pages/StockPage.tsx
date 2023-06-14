@@ -6,7 +6,7 @@ import ProductCard from "../components/ProductCard";
 import { Product } from "../types";
 
 const StockPage: React.FC = () => {
-  const { isLoading } = useFetchProductsQuery(null);
+  const { isLoading } = useFetchProductsQuery();
   const products = useSelector((state: StoreRootState) => state.search.filteredProducts);
 
 

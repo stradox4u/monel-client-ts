@@ -48,11 +48,11 @@ const CartSummary: React.FC<{ mode: string }> = ({ mode }) => {
       setLoadingState(true)
       if (mode === "purchase") {
         await submitPurchaseCart({ products: formatCart, total: cartTotal }).unwrap();
-        dispatch(emptyCart());
+        dispatch(emptyCart(null));
       }
       if (mode === "sale") {
         await submitSaleCart({ products: formatCart, total: cartTotal }).unwrap();
-        dispatch(emptyCart());
+        dispatch(emptyCart(null));
       }
       setLoadingState(false)
     } catch (err: any) {

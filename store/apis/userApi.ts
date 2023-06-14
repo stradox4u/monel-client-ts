@@ -21,7 +21,7 @@ const userApi = createApi({
           }
         }
       }),
-      logoutUser: builder.mutation({
+      logoutUser: builder.mutation<{ message: string; }, void>({
         invalidatesTags: ["AuthUser"],
         query: () => {
           return {

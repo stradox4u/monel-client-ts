@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Transactions } from "../../src/types";
 
 const saleApi = createApi({
   reducerPath: "sale",
@@ -31,10 +32,26 @@ const saleApi = createApi({
             body,
           }
         }
+      }),
+      getPurchases: builder.query<Transactions<"purchases">, void>({
+        query: () => {
+          return {
+            url: "/purchases",
+            method: "GET",
+          }
+        }
+      }),
+      getSales: builder.query<Transactions<"sales">, void>({
+        query: () => {
+          return {
+            url: "/sales",
+            method: "GET",
+          }
+        }
       })
     }
   }
 });
 
-export const { useMakeSaleMutation, useMakePurchaseMutation } = saleApi;
+export const { useMakeSaleMutation, useMakePurchaseMutation, useGetPurchasesQuery, useGetSalesQuery } = saleApi;
 export { saleApi };

@@ -1,4 +1,24 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Product } from "../../src/types";
+
+type ProductsResponse = {
+  message: string;
+  products: Product[];
+}
+
+type ProductPostResponse = {
+  message: string;
+  product: Product;
+}
+
+type UpdateProductBody = {
+  name: string;
+  price: number;
+  picture: string;
+  productId: string;
+}
+
+type CreateProductBody = Omit<UpdateProductBody, "productId">;
 
 const productsApi = createApi({
   reducerPath: "products",
@@ -12,7 +32,7 @@ const productsApi = createApi({
   tagTypes: ["Products", "Inventory"],
   endpoints: (builder) => {
     return {
-      fetchProducts: builder.query({
+      fetchProducts: builder.query<ProductsResponse, void>({
         providesTags: ["Products"],
         query: () => {
           return {
@@ -21,7 +41,7 @@ const productsApi = createApi({
           }
         }
       }),
-      createProduct: builder.mutation({
+      createProduct: builder.mutation<ProductPostResponse, CreateProductBody>({
         invalidatesTags: ["Products"],
         query: ({ name, price, picture }) => {
           return {
@@ -35,7 +55,7 @@ const productsApi = createApi({
           }
         }
       }),
-      updateProduct: builder.mutation({
+      updateProduct: builder.mutation<ProductPostResponse, UpdateProductBody>({
         invalidatesTags: ["Products"],
         query: ({ name, price, picture, productId }) => {
           return {
@@ -49,7 +69,7 @@ const productsApi = createApi({
           }
         }
       }),
-      deleteProduct: builder.mutation({
+      deleteProduct: builder.mutation<{message: string}, {productId: string}>({
         invalidatesTags: ["Products", "Inventory"],
         query: ({ productId }) => {
           return {

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, SliceCaseReducers, createSlice } from "@reduxjs/toolkit";
 import { CartItem } from "../../src/types";
 
 type SliceState = {
@@ -9,11 +9,11 @@ const initialState: SliceState = {
   items: [],
 }
 
-const cartSlice = createSlice({
+const cartSlice = createSlice<SliceState, SliceCaseReducers<SliceState>, "cart">({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action: { type: string; payload: CartItem }) => {
+    addToCart: (state, action: PayloadAction<CartItem>) => {
       const existingItem = state.items.find((el) => el.product._id === action.payload.product._id);
       if (existingItem) {
         existingItem.quantity++;
@@ -25,16 +25,16 @@ const cartSlice = createSlice({
         })
       }
     },
-    removeFromCart: (state, action: { type: string; payload: string }) => {
+    removeFromCart: (state, action: PayloadAction<string>) => {
       const index = state.items.findIndex((el) => el.product._id === action.payload);
       state.items.splice(index, 1);
     },
-    updateCart: (state, action: { type: string; payload: CartItem }) => {
+    updateCart: (state, action: PayloadAction<CartItem>) => {
       const index = state.items.findIndex((el) => el.product._id === action.payload.product._id);
       const { product, price, quantity } = action.payload;
       state.items.splice(index, 1, { product, price, quantity });
     },
-    emptyCart: (state) => {
+    emptyCart: (state, _action: PayloadAction<void>) => {
       state.items = [];
     }
   }

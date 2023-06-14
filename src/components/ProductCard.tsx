@@ -13,7 +13,7 @@ type ProductCardProps = {
 const ProductCard: React.FC<ProductCardProps> = ({ product, showStock }) => {
   const userObject = getCurrentUser(store.getState());
 
-  const { data: stock, error, isLoading } = useFetchInventoryQuery(null);
+  const { data: stock, error, isLoading } = useFetchInventoryQuery();
 
   const navigate = useNavigate()
 

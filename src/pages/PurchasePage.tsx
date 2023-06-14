@@ -10,7 +10,7 @@ import { StoreRootState, addToCart, emptyCart, useFetchProductsQuery } from "../
 import { Product } from "../types";
 
 const PurchasePage: React.FC = () => {
-  useFetchProductsQuery(null);
+  useFetchProductsQuery();
   const products: Product[] = useSelector((state: StoreRootState) => state.search.filteredProducts);
   const cart = useSelector((state: StoreRootState) => state.cart.items);
 
@@ -18,7 +18,7 @@ const PurchasePage: React.FC = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(emptyCart());
+      dispatch(emptyCart(null));
     }
   }, []);
 

@@ -1,8 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, SliceCaseReducers, createSlice } from "@reduxjs/toolkit";
 import { productsApi } from "../apis/productsApi";
 import { Product } from "../../src/types";
 
-const searchSlice = createSlice({
+type SearchSliceInitialState = {
+  searchTerm: string;
+  products: Product[];
+  filteredProducts: Product[];
+}
+
+const searchSlice = createSlice<SearchSliceInitialState, SliceCaseReducers<SearchSliceInitialState>, "search">({
   name: "search",
   initialState: {
     searchTerm: "",
@@ -10,7 +16,7 @@ const searchSlice = createSlice({
     filteredProducts: [],
   },
   reducers: {
-    setSearchTerm: (state, action: { type: string; payload: string; }) => {
+    setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
       console.log(state.products)
       state.filteredProducts = state.products.filter((product: Product) => {

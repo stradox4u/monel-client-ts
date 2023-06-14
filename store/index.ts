@@ -51,4 +51,4 @@ export {
 } from "./apis/productsApi";
 export { useFetchInventoryQuery } from "./apis/inventoryApi";
 export { addToCart, removeFromCart, updateCart, emptyCart } from "./slices/cartSlice";
-export { useMakeSaleMutation, useMakePurchaseMutation } from "./apis/saleApi";
+export { useMakeSaleMutation, useMakePurchaseMutation, useGetPurchasesQuery, useGetSalesQuery } from "./apis/saleApi";
