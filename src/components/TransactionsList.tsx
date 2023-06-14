@@ -1,5 +1,5 @@
 import React from "react";
-import PurchaseListItem from "./PurchaseListItem";
+import TransactionListItem from "./TransactionListItem";
 import spinner from "../assets/images/spinner.svg";
 import { useGetPurchasesQuery, useGetSalesQuery } from "../../store";
 import { Transactions } from "../types";
@@ -12,7 +12,7 @@ const TransactionsList: React.FC<{ mode: "purchases" | "sales" }> = ({ mode }) =
   if (!isLoading && !error) {
     list = (data as Transactions<typeof mode>)[mode].map(entry => {
       return (
-        <PurchaseListItem item={entry} key={entry._id} />
+        <TransactionListItem item={entry} key={entry._id} />
       )
     })
   }

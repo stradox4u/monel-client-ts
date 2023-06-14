@@ -1,7 +1,7 @@
 import React from "react";
 import { Transaction } from "../types";
 
-const PurchaseListItem: React.FC<{item: Transaction}> = ({ item }) => {
+const TransactionListItem: React.FC<{item: Transaction}> = ({ item }) => {
   const productsList = item.products?.map(product => {
     return (
       <div className='flex flex-col justify-start' key={product._id}>
@@ -37,4 +37,4 @@ const PurchaseListItem: React.FC<{item: Transaction}> = ({ item }) => {
   )
 }
 
-export default PurchaseListItem;
+export default TransactionListItem;
