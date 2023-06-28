@@ -13,7 +13,7 @@ type ProductCardProps = {
 const ProductCard: React.FC<ProductCardProps> = ({ product, showStock }) => {
   const userObject = getCurrentUser(store.getState());
 
-  const { data: stock, error, isLoading } = useFetchInventoryQuery();
+  const { data: stock } = useFetchInventoryQuery();
 
   const navigate = useNavigate()
 
@@ -21,7 +21,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, showStock }) => {
     navigate(`/product/${product._id}`)
   }
 
-  const [deleteProduct, response] = useDeleteProductMutation();
+  const [deleteProduct] = useDeleteProductMutation();
   
   const deleteProductHandler = () => {
     deleteProduct({productId: product._id});

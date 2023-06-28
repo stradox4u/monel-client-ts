@@ -33,7 +33,7 @@ const EditProduct: React.FC = () => {
     picture: ""
   });
   const navigate = useNavigate();
-  const [updateProduct, { isLoading, error }] = useUpdateProductMutation();
+  const [updateProduct, { isLoading }] = useUpdateProductMutation();
 
   const submitUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

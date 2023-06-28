@@ -13,7 +13,7 @@ const NavBar: React.FC = () => {
     setShowLogout(!showLogout);
   }
 
-  const [logoutUser, response] = useLogoutUserMutation();
+  const [logoutUser] = useLogoutUserMutation();
  
   const runLogout = () => {
     logoutUser();

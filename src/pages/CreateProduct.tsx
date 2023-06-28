@@ -24,7 +24,7 @@ const CreateProduct: React.FC = () => {
     price: "",
     picture: "",
   });
-  const [createProduct, {isLoading, error}] = useCreateProductMutation();
+  const [createProduct, {isLoading}] = useCreateProductMutation();
   
   const submitProduct = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
