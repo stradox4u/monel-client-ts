@@ -10,11 +10,15 @@ const TransactionsList: React.FC<{ mode: "purchases" | "sales" }> = ({ mode }) =
 
   let list;
   if (!isLoading && !error) {
-    list = (data as Transactions<typeof mode>)[mode].map(entry => {
+    const copiedData = (data as Transactions<typeof mode>)[mode].slice();
+    copiedData.sort((a, b) => {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
+    list = copiedData.map(entry => {
       return (
         <TransactionListItem item={entry} key={entry._id} />
       )
-    })
+    });
   }
   return (
     <div>
