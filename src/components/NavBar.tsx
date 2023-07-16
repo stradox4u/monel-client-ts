@@ -22,12 +22,12 @@ const NavBar: React.FC = () => {
 
 
   return (
-    <nav className="flex flex-row gap-8 justify-between align-baseline">
-      <Link to="/" className="grow-0"><p className="text-3xl font-texturina text-monel-blue">MONEL Ventures</p></Link>
-      <div className="grow">
+    <nav className="grid grid-cols-5 items-center justify-items-start">
+      <Link to="/" className="col-span-1"><p className="sm:text-3xl text-base font-texturina text-monel-blue">MONEL</p></Link>
+      <div className="col-span-3 sm:w-full justify-self-stretch shrink sm:h-12 h-8">
         <SearchBar />
       </div>
-      <div onClick={toggleLogout} className="flex flex-row justify-end align-middle grow-0 cursor-pointer relative">
+      <div onClick={toggleLogout} className="col-span-1 justify-self-end cursor-pointer relative">
         <img src={userObject?.avatar} alt="user profile" className="rounded-full w-12 h-12 object-cover" />
         {showLogout ? (
           <div onClick={runLogout} className="absolute top-[100%] right-[100%] bg-monel-blue py-3 px-4 rounded-md shadow-md transform hover:scale-110">

@@ -11,19 +11,19 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <form className="flex justify-between gap-0 h-full">
+    <div className="flex justify-around gap-0 h-full sm:w-full">
       <input
-        className="shadow-md px-3 rounded-l-md border-none grow focus:outline-none focus:ring-1 focus:ring-monel-blue"
+        className="shadow-md pl-3 rounded-l-md border-none sm:w-full w-[60%] grow focus:outline-none focus:ring-1 focus:ring-monel-blue"
         type="text"
-        placeholder="Search by product name"
+        placeholder="Search name"
         value={value}
         onChange={onChange}
       />
-      <div className="shadow-md w-16 bg-monel-gray bg-opacity-55 rounded-r-md
+      <div className="shadow-md sm:px-4 px-2 bg-monel-gray bg-opacity-55 rounded-r-md
         flex items-center">
         <i className="fas fa-search mx-auto"></i>
       </div>
-    </form>
+    </div>
   );
 };
 

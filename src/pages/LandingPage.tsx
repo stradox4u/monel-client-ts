@@ -37,18 +37,18 @@ const LandingPage: React.FC = () => {
     const salesStats = { salesData, salesChange }
   
     return (
-      <>
+      <div className="mt-3">
         <GreetingCard />
         {
           isLoading ? (<div className="w-full">
             <img src={spinner} alt='spinner' className='aspect-square h-32 animate-spin mt-16 mx-auto'></img>
           </div>)
-            : (<div className='flex justify-between gap-4 items-stretch'>
+            : (<div className='flex sm:flex-row flex-col sm:justify-between gap-4 sm:items-stretch'>
               <StatCard category='purchases' stats={purchasesStats} />
               <StatCard category='sales' stats={salesStats} />
             </div>)
         }
-      </>
+      </div>
     );
   }
 }

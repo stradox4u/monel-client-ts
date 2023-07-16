@@ -63,8 +63,8 @@ const EditProduct: React.FC = () => {
   }
 
   return (
-    <div className='max-w-[60%] mx-auto p-8'>
-      <h2 className='font-montserrat text-3xl font-semibold'>Edit Product</h2>
+    <div className='sm:max-w-[60%] w-full mx-auto sm:p-8 p-2'>
+      <h2 className='font-montserrat sm:text-3xl text-base font-semibold'>Edit Product</h2>
       <form onSubmit={submitUpdate} className='py-8 flex flex-col gap-5'>
       <div className='flex flex-col gap-2 items-stretch'>
           <div className="flex gap-2 items-center justify-between">
