@@ -44,20 +44,22 @@ const CartItem: React.FC<CartItemProps> = ({ product, mode }) => {
   }
 
   return (
-    <div className="w-full flex justify-between items-center my-3">
-      <h3>{product.name}</h3>
-      <div className="max-w-[30%]">
-        <input type='number' value={quantity} onChange={updateQuantity} className="base-input px-2" />
+    <div className="w-full grid grid-cols-4 gap-4 items-center justify-items-start">
+      <h3 className="block col-span-1 truncate">{product.name}</h3>
+      <div className={(mode === "sale" ? "col-span-2" : "col-span-1") + " justify-self-stretch"}>
+        <input type='number' value={quantity} onChange={updateQuantity} className="base-input px-2 w-full" />
       </div>
       {mode === "purchase" ? (
-        <div className="max-w-[30%]">
+        <div className="col-span-1">
           <input type='number' value={price} onChange={updatePrice} className="base-input" />
         </div>
       ): null}
-      <img src={saveIcon} alt='save' onClick={saveCartItem}
-        className="aspect-square max-w-[3%] hover:scale-105 cursor-pointer"/>
-      <img src={deleteIcon} alt='save' onClick={deleteCartItem}
-        className="aspect-square max-w-[3%] hover:scale-105 cursor-pointer"/>
+      <div className="col-span-1 flex gap-2 justify-around">
+        <img src={saveIcon} alt='save' onClick={saveCartItem}
+          className="aspect-square sm:w-[12%] w-[30%] hover:scale-105 cursor-pointer"/>
+        <img src={deleteIcon} alt='save' onClick={deleteCartItem}
+          className="aspect-square sm:w-[12%] w-[30%] hover:scale-105 cursor-pointer"/>
+      </div>
     </div>
   )
 }

@@ -39,13 +39,13 @@ const PurchasePage: React.FC = () => {
     )
   })
   return (
-    <div className='grid grid-cols-3'>
-      <div className='col-span-2 flex justify-between items-start py-2 gap-4'>
-        <div className='grid grid-cols-3 gap-4'>
+    <div className='grid grid-cols-3 sm:-mt-48'>
+      <div className='sm:col-span-2 col-span-3 flex justify-between items-start py-2 gap-4'>
+        <div className='grid sm:grid-cols-3 grid-cols-2 sm:gap-4 gap-2'>
           {productCards}
         </div>
       </div>
-      <div className='col-span-1'>
+      <div className='sm:col-span-1 col-span-3'>
         <CartSummary mode='purchase' />
       </div>
       <div className='col-span-3'>
@@ -54,7 +54,7 @@ const PurchasePage: React.FC = () => {
       <div className='col-span-3 font-montserrat text-lg text-monel-blue flex justify-around'>
         <Link to='view'>View Purchases</Link>
       </div>
-      <div className='col-span-3'>
+      <div className='col-span-3 self-start'>
         <Outlet />
       </div>
     </div>

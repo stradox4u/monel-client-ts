@@ -22,7 +22,7 @@ const StockPage: React.FC = () => {
 
 
   return (
-    <div className="mx-auto mt-12 grid grid-cols-3 gap-4">
+    <div className="mx-auto mt-12 grid sm:grid-cols-3 grid-cols-1 gap-4">
       {productsArray}
     </div>
   )
