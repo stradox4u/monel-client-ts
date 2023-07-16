@@ -44,8 +44,8 @@ const CartItem: React.FC<CartItemProps> = ({ product, mode }) => {
   }
 
   return (
-    <div className="w-full grid grid-cols-4 gap-4 items-center justify-items-start">
-      <h3 className="block col-span-1 truncate">{product.name}</h3>
+    <div className="w-full grid grid-cols-4 gap-4 items-center justify-items-start mb-2">
+      <h3 className="block col-span-1 truncate text-xs sm:text-base">{product.name}</h3>
       <div className={(mode === "sale" ? "col-span-2" : "col-span-1") + " justify-self-stretch"}>
         <input type='number' value={quantity} onChange={updateQuantity} className="base-input px-2 w-full" />
       </div>

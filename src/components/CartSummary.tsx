@@ -20,8 +20,8 @@ const CartSummary: React.FC<{ mode: string }> = ({ mode }) => {
   const cartItems = cart.map(item => {
     return (
       <li className={`w-full flex justify-between p-2 ${item.product._id === error.productId ? "bg-red-300" : ""}`} key={item.product._id}>
-        <p className="font-montserrat text-sm">{item.product.name}</p>
-        <p className="font-montserrat text-sm">{item.quantity} (pcs)</p>
+        <p className="font-montserrat sm:text-sm text-xs">{item.product.name}</p>
+        <p className="font-montserrat sm:text-sm text-xs">{item.quantity} (pcs)</p>
       </li>
     )
   });
@@ -81,8 +81,8 @@ const CartSummary: React.FC<{ mode: string }> = ({ mode }) => {
       </ul>
       <hr className="mt-4"></hr>
       <div className="my-3 font-montserrat">
-        <h3 className="text-base">Total:</h3>
-        <span className="text-lg font-semibold">&#8358; {cartTotal.toFixed(2)}</span>
+        <h3 className="sm:text-base text-sm">Total:</h3>
+        <span className="sm:text-lg text-base font-semibold">&#8358; {cartTotal.toFixed(2)}</span>
       </div>
       <div className="w-full">
         <BaseButton buttonType='button' buttonText='Submit' isLoading={loadingState} handleClick={submitCart} />
