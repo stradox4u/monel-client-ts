@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import Hamburger from "./Hamburger";
 import { getCurrentUser, store } from "../../store";
 
 
@@ -20,25 +21,43 @@ const SideBar: React.FC = () => {
     userRole = ["user"]
   }
 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenuOpen = () => {
+    setMenuOpen(!menuOpen);
+  }
+
   const sidebarEntries = sidebarItems.map((el, index) => {
     return (
       userRole.includes(el.permission) ? (
         <NavLink to={el.link} key={index}
-          className={({isActive}) => (isActive ? "bg-gradient-to-r from-emerald-500 to-emerald-900 rounded-md " : "") + "group inline-flex gap-4 items-baseline hover:text-slate-50 cursor-pointer p-4"}>
+          className={({isActive}) => (isActive ? "bg-gradient-to-r from-emerald-500 to-emerald-900 rounded-md " : "") + "group inline-flex gap-4 items-baseline hover:text-slate-50 cursor-pointer p-4 w-full"}>
         <i className={el.icon}></i>
-        <p className="block group-hover:font-semibold text-md align-baseline font-montserrat truncate">
+        <p className="block group-hover:font-semibold sm:text-md align-baseline font-montserrat truncate">
           {el.label}
         </p>
       </NavLink>
       ) : null
     )
   })
-  return (
-    <div className="w-full h-full rounded-l-md py-12 px-6 bg-monel-green">
-      <ul className="list-style-none flex flex-col gap-12">
+
+  const mobileMenu = (
+    menuOpen ? (
+      <ul className="list-style-none sm:flex flex-col gap-2">
         {sidebarEntries}
       </ul>
-    </div>
+    ) : ""
+  )
+
+  return (
+    <div className="w-full h-full sm:rounded-l-md sm:py-12 py-4 px-6 bg-monel-green relative">
+      <div onClick={toggleMenuOpen} className="sm:hidden">
+        <Hamburger menuOpen={menuOpen} />
+        {mobileMenu}
+      </div>
+      <ul className="list-style-none sm:flex flex-col sm:gap-12 gap-2 hidden">
+        {sidebarEntries}
+      </ul>
+    </div >
   )
 }
 
