@@ -1,4 +1,4 @@
 node_modules
-.dockerignore
+# .dockerignore
 dist
 build
